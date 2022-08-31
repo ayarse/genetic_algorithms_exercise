@@ -1,4 +1,3 @@
-// import config from "./config";
 import { Generation } from "../classes/Generation";
 import { Individual } from "../classes/Individual";
 import { RunConfig } from "./config";
