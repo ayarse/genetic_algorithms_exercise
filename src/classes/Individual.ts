@@ -7,11 +7,13 @@ export class Individual {
 
     geneLength: number;
     datasetLength: number;
+    lineCount: number;
 
     constructor(config: RunConfig, genes?: number[]) {
 
         this.geneLength = config.geneLength;
         this.datasetLength = config.datasetLength;
+        this.lineCount = config.lineCount;
 
         if (!genes) {
             this.genes = [];
@@ -32,7 +34,7 @@ export class Individual {
             const action = line[this.datasetLength - 1];
             this.rulebase.push(new Rule(condition, action));
         }
-        for (let i = 0; i < 32; i++) {
+        for (let i = 0; i < this.lineCount - 1; i++) {
             for (let j = 0; j < 10; j++) {
                 let matches = 0;
                 for (let l = 0; l < this.datasetLength - 1; l++) {
