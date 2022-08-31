@@ -12,9 +12,10 @@ import { crossover, mutation, tournamentSelection } from './util/helpers';
 import { plot, Plot } from 'nodeplotlib';
 import { data1Config, data2Config, data3Config, RunConfig } from './util/config';
 
-const globalRules: Rule[] = [];
+let globalRules: Rule[] = [];
 
 const loadData = async (filename: string) => {
+    globalRules = [];
     const fileStream = fs.createReadStream(filename);
     const rl = readline.createInterface({
         input: fileStream,
