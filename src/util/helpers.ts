@@ -4,6 +4,25 @@ import { Individual } from "../classes/Individual";
 import { RunConfig } from "./config";
 import readline from 'readline';
 import fs from 'fs';
+import path from "path";
+
+const io = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
+export const prompt = (q: string) => {
+    return new Promise((res, rej) => {
+        io.question(q, answer => {
+            res(answer);
+        })
+    });
+};
+
+export const dataFile = (filename: string): string => {
+    const isBuild = (/build\/?$/.test(__dirname))
+    return path.join(__dirname, isBuild ? `../` : '../../', `data/${filename}`);
+}
 
 export const readFile = async (filename: string) => {
     const lines: string[] = [];

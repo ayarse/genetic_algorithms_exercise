@@ -3,31 +3,13 @@
  * Villa College - BSCHCS (Jan 2020)
  */
 
-import readline from 'readline';
-import path from 'path';
 import { Rule } from './classes/Rule';
 import { data1Config, data2Config, data3Config } from './util/config';
 import { loadData, loadDataSet3 } from './util/loaders';
 import { findAvgBestLowFitness, findBestFitness } from './ga';
+import { dataFile, prompt } from './util/helpers';
 
 let globalRules: Rule[] = [];
-
-const io = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
-
-const prompt = (q: string) => {
-    return new Promise((res, rej) => {
-        io.question(q, answer => {
-            res(answer);
-        })
-    });
-};
-
-const dataFile = (filename: string): string => {
-    return path.join(__dirname, `../data/${filename}`);
-}
 
 (async function main() {
     let exit = false;
