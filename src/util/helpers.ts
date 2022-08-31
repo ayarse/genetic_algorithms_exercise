@@ -2,6 +2,27 @@
 import { Generation } from "../classes/Generation";
 import { Individual } from "../classes/Individual";
 import { RunConfig } from "./config";
+import readline from 'readline';
+import fs from 'fs';
+
+export const readFile = async (filename: string) => {
+    const lines: string[] = [];
+    const fileStream = fs.createReadStream(filename);
+    const rl = readline.createInterface({
+        input: fileStream,
+        crlfDelay: Infinity
+    });
+    let lineCounter = 0;
+    for await (const line of rl) {
+        lineCounter++;
+        if (lineCounter === 1) {
+            continue;
+        }
+        lines.push(line);
+    }
+    return lines;
+}
+
 
 export const tournamentSelection = (generation: Generation, config: RunConfig) => {
     const { population } = config;

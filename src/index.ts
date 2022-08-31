@@ -4,11 +4,10 @@
  */
 
 import readline from 'readline';
-import fs from 'fs';
 import path from 'path';
 import { Rule } from './classes/Rule';
 import { Generation } from './classes/Generation';
-import { crossover, mutation, tournamentSelection } from './util/helpers';
+import { crossover, mutation, readFile, tournamentSelection } from './util/helpers';
 import { plot, Plot } from 'nodeplotlib';
 import { data1Config, data2Config, data3Config, RunConfig } from './util/config';
 
@@ -16,19 +15,8 @@ let globalRules: Rule[] = [];
 
 const loadData = async (filename: string) => {
     globalRules = [];
-    const fileStream = fs.createReadStream(filename);
-    const rl = readline.createInterface({
-        input: fileStream,
-        crlfDelay: Infinity
-    });
-
-    let lineCounter = 0;
-
-    for await (const line of rl) {
-        lineCounter++;
-        if (lineCounter === 1) {
-            continue;
-        }
+    const lines = await readFile(filename);
+    for (const line of lines) {
 
         const splitLine = line.split(' ');
         const condition = splitLine[0].split('').map(s => parseInt(s, 10));
