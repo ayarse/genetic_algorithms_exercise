@@ -24,4 +24,5 @@ module.exports = {
         "header/header": [2, "config/header.ts"]
 
     },
+    ignorePatterns: ["build/**/*.js"],
 };
