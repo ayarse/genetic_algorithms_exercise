@@ -1,10 +1,10 @@
-import config from "./config";
+// import config from "./config";
 import { Generation } from "../classes/Generation";
 import { Individual } from "../classes/Individual";
+import { RunConfig } from "./config";
 
-const { population, geneLength, mutationRate, datasetLength } = config;
-
-export const tournamentSelection = (generation: Generation) => {
+export const tournamentSelection = (generation: Generation, config: RunConfig) => {
+    const { population } = config;
     const offspring: Individual[] = [];
     for (let i = 0; i < population; i++) {
         let candidate1 = Math.floor(Math.random() * population);
@@ -23,7 +23,8 @@ export const tournamentSelection = (generation: Generation) => {
     return offspring;
 }
 
-export const crossover = (offspring: Individual[]) => {
+export const crossover = (offspring: Individual[], config: RunConfig) => {
+    const { population, geneLength } = config;
     for (let i = 0; i < population; i += 2) {
         const crossoverPoint = Math.floor(Math.random() * population);
         for (let j = crossoverPoint; j < geneLength; j++) {
@@ -36,7 +37,8 @@ export const crossover = (offspring: Individual[]) => {
     return offspring;
 }
 
-export const mutation = (offspring: Individual[]) => {
+export const mutation = (offspring: Individual[], config: RunConfig) => {
+    const { population, geneLength, mutationRate, datasetLength } = config;
     for (let i = 0; i < population; i++) {
         for (let j = 0; j < geneLength; j++) {
             if (Math.floor(Math.random() * 100) <= mutationRate) {

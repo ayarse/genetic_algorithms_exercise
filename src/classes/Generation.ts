@@ -1,8 +1,8 @@
-import config from "../util/config";
+import { RunConfig } from "../util/config";
 import { Individual } from "./Individual";
 import { Rule } from "./Rule";
 
-const { population } = config;
+
 
 export class Generation {
     individuals: Individual[];
@@ -10,15 +10,20 @@ export class Generation {
     lowestFitness: number = 0;
     averageFitness: number = 0;
 
-    constructor(individuals?: Individual[]) {
+    population: number;
+
+    constructor(config: RunConfig, individuals?: Individual[]) {
+
+        this.population = config.population;
         if (!individuals) {
             this.individuals = [];
-            for (let i = 0; i < population; i++) {
-                this.individuals.push(new Individual());
+            for (let i = 0; i < this.population; i++) {
+                this.individuals.push(new Individual(config));
             }
         } else {
             this.individuals = individuals;
         }
+
     }
 
     fitness_func(globalRules: Rule[]) {
@@ -27,7 +32,7 @@ export class Generation {
         }
 
         let total = 0;
-        for (let i = 0; i < population; i++) {
+        for (let i = 0; i < this.population; i++) {
             if (this.individuals[i].fitness > this.fittest) {
                 this.lowestFitness = this.fittest;
                 this.fittest = this.individuals[i].fitness;
@@ -36,6 +41,6 @@ export class Generation {
             total = total + this.individuals[i].fitness;
         }
 
-        this.averageFitness = total / population;
+        this.averageFitness = total / this.population;
     }
 }
