@@ -1,3 +1,8 @@
+/**
+ * Ayas Nasih - S1600655
+ * Villa College - BSCHCS (Jan 2020)
+ */
+
 import { RunConfig } from "../util/config";
 import { Rule } from "./Rule";
 export class Individual {

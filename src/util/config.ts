@@ -1,3 +1,8 @@
+/**
+ * Ayas Nasih - S1600655
+ * Villa College - BSCHCS (Jan 2020)
+ */
+
 export interface RunConfig {
     geneLength: number,
     population: number,

@@ -1,3 +1,8 @@
+/**
+ * Ayas Nasih - S1600655
+ * Villa College - BSCHCS (Jan 2020)
+ */
+
 import { plot, Plot } from "nodeplotlib";
 import { Generation } from "./classes/Generation";
 import { Rule } from "./classes/Rule";

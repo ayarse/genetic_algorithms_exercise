@@ -1,3 +1,8 @@
+/**
+ * Ayas Nasih - S1600655
+ * Villa College - BSCHCS (Jan 2020)
+ */
+
 import { Generation } from "../classes/Generation";
 import { Individual } from "../classes/Individual";
 import { RunConfig } from "./config";
