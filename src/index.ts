@@ -69,7 +69,7 @@ const findBestFitness = () => {
         },
     ];
 
-    plot(data);
+    plot(data, { title: `Best Fitness Over ${generations.length - 1} Generations` });
 }
 
 const findAvgBestLowFitness = () => {
@@ -127,7 +127,7 @@ const findAvgBestLowFitness = () => {
         },
     ];
 
-    plot(data);
+    plot(data, { title: `Average, Best, & Lowest Fitness Over ${generations.length - 1} Generations` });
 }
 
 
