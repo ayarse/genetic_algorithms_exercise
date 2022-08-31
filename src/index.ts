@@ -13,6 +13,33 @@ import { data1Config, data2Config, data3Config, RunConfig } from './util/config'
 
 let globalRules: Rule[] = [];
 
+const loadDataSet3 = async (filename: string) => {
+    globalRules = [];
+    const lines = await readFile(filename);
+    for (const line of lines) {
+        const data = line.split(" ");
+        const last = data.pop()!;
+
+        let gene = "";
+        let counter = 0;
+
+        for (const val of data) {
+            const floatVal = parseFloat(val);
+
+            gene += floatVal > 0.5 ? "1" : "0";
+            counter++;
+            if (counter === 6) {
+                const condition = gene.split('').map(s => parseInt(s, 10));
+                const output = parseInt(last);
+                const rule = new Rule(condition, output);
+                globalRules.push(rule);
+                counter = 0;
+                gene = "";
+            }
+        }
+    }
+}
+
 const loadData = async (filename: string) => {
     globalRules = [];
     const lines = await readFile(filename);
@@ -152,21 +179,24 @@ const dataFile = (filename: string): string => {
             case '1':
                 file = dataFile("data1.txt");
                 config = data1Config;
+                await loadData(file);
                 break;
             case '2':
                 file = dataFile("data2.txt");
                 config = data2Config;
+                await loadData(file);
                 break;
             case '3':
                 file = dataFile("data3.txt");
                 config = data3Config;
+                await loadDataSet3(file);
                 break;
             default:
                 process.exit();
                 break;
         }
 
-        await loadData(file);
+
         findBestFitness(config);
         findAvgBestLowFitness(config);
     }
