@@ -48,7 +48,15 @@ export const findBestFitness = ({ config, globalRules, epochs }: GAConfig) => {
         },
     ];
 
-    plot(data, { title: `Best Fitness Over ${generations.length - 1} Generations` });
+    plot(data, {
+        title: `Best Fitness Over ${generations.length - 1} Generations`,
+        xaxis: {
+            title: "Generation"
+        },
+        yaxis: {
+            title: "Fitness"
+        }
+    });
 }
 
 export const findAvgBestLowFitness = ({ config, globalRules, epochs }: GAConfig) => {
@@ -107,5 +115,13 @@ export const findAvgBestLowFitness = ({ config, globalRules, epochs }: GAConfig)
         },
     ];
 
-    plot(data, { title: `Average, Best, & Lowest Fitness Over ${generations.length - 1} Generations` });
+    plot(data, {
+        title: `Average, Best, & Lowest Fitness Over ${generations.length - 1} Generations`,
+        xaxis: {
+            title: "Generation"
+        },
+        yaxis: {
+            title: "Fitness"
+        }
+    });
 }
