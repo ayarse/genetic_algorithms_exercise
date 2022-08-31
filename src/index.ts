@@ -39,6 +39,9 @@ const loadData = async (filename: string) => {
 }
 
 const findBestFitness = (config: RunConfig) => {
+
+    const epochs = 500;
+
     const generations: Generation[] = [];
     generations.push(new Generation(config));
     generations[0].fitness_func(globalRules);
@@ -46,7 +49,7 @@ const findBestFitness = (config: RunConfig) => {
     const plotData: number[] = [];
     const plotBestFit: number[] = [];
 
-    for (let i = 0; i < 500; i++) {
+    for (let i = 0; i < epochs; i++) {
         let offspring = tournamentSelection(generations[0], config);
         offspring = crossover(offspring, config);
         offspring = mutation(offspring, config);
@@ -74,6 +77,9 @@ const findBestFitness = (config: RunConfig) => {
 }
 
 const findAvgBestLowFitness = (config: RunConfig) => {
+
+    const epochs = 50;
+
     const generations: Generation[] = [];
     generations.push(new Generation(config));
     generations[0].fitness_func(globalRules);
@@ -85,7 +91,7 @@ const findAvgBestLowFitness = (config: RunConfig) => {
     const plotBestFit: number[] = [];
     const plotAvgFit: number[] = [];
     const plotLowFit: number[] = [];
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < epochs; i++) {
         let offspring = tournamentSelection(generations[0], config);
         offspring = crossover(offspring, config);
         offspring = mutation(offspring, config);
